@@ -2,7 +2,7 @@
 BUILD_DIR = build
 
 # Project name (same as in CMakeLists.txt)
-PROJECT_NAME = stm32_led_blink
+PROJECT_NAME = stm32_reaction_game
 
 # Default target
 all: $(BUILD_DIR)

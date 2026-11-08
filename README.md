@@ -11,7 +11,7 @@ A minimal C++ project template for STM32L4R5ZI microcontroller with CMake build 
 - **CMake** build system with Makefile convenience wrapper
 - **Integrated debugging** with OpenOCD and GDB
 - **tmux-aware** debug sessions for optimal workflow
-- **LED blink example** demonstrating GPIO control
+- **LED reaction game** Demonstrating GPIO control, EXTI, state handeling and time measuring.
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ STM32L4R5ZI-Template/
 ├── main.cpp                 # Main C++ application
 ├── system_stm32l4xx.c       # STM32 system configuration
 ├── startup_stm32l4r5xx.s    # ARM startup assembly
-├── stm32l4r5zi.ld           # Linker script
+├── stm32f446.ld           # Linker script
 ├── third_party/             # Vendored CMSIS headers (see third_party/README.md)
 │   ├── cmsis-core/Include/      # CMSIS-Core (Cortex-M) headers
 │   └── cmsis-device-l4/Include/ # STM32L4 device headers
@@ -91,7 +91,7 @@ The project uses CMake for the build system with a Makefile wrapper for convenie
 1. **CMake** handles cross-compilation and linking
 2. **Makefile** provides simple commands for common tasks
 3. **ARM tool-chain** compiles C++, C, and Assembly files
-4. **Output**: `build/stm32_led_blink.elf` and `build/stm32_led_blink.bin`
+4. **Output**: `build/stm32_reaction_game.elf` and `build/stm32_reaction_game.bin`
 
 ## Flashing
 
@@ -146,13 +146,16 @@ make gdb
 
 ### STM32L4R5ZI Nucleo-144
 
-- **LED2**: Connected to GPIO Port B, Pin 7
+- **LED2**: Connected to GPIO Port C, Pin 4
 - **Debug interface**: ST-Link V2-1
-- **UART**: Available via ST-Link (LPUART1, requires correct SB setup)
+- **UART**: Available via ST-Link (USART2)
 
 ### Pin Configuration
 
-The example blinks LED2 (PB7) with a simple delay loop.
+The code Prints game instructions over UART with a baud rate of 115200
+Activates the on board user LED (LED2) and after a random backoff delay disables it.
+After which the user is asked to press the External button connected to PC4, triggering an interrupt that measures the reaction time of the user.
+Restart of the game after 1.5 seconds of delay.
 
 ## Available Make Targets
 
@@ -189,9 +192,9 @@ keep their own licenses.
 
 Linkerscript, startup & system files are taken from ST repositories:
 
-- [stm32l4r5zi.ld](https://github.com/STMicroelectronics/STM32CubeL4/blob/master/Projects/NUCLEO-L4R5ZI/Templates/STM32CubeIDE/STM32L4R5ZITX_FLASH.ld)
-- [startup_stm32l4r5xx.s](https://github.com/STMicroelectronics/cmsis-device-l4/blob/v1.7.5/Source/Templates/gcc/startup_stm32l4r5xx.s) — cmsis-device-l4 `v1.7.5`, Apache-2.0
-- [system_stm32l4xx.c](https://github.com/STMicroelectronics/cmsis-device-l4/blob/v1.7.5/Source/Templates/system_stm32l4xx.c) — cmsis-device-l4 `v1.7.5`, Apache-2.0
+- [STM32F446RETX_FLASH.ld](https://github.com/STMicroelectronics/STM32CubeF4/blob/master/Projects/STM32446E-Nucleo/Templates/STM32CubeIDE/STM32F446RETX_FLASH.ld)
+- [startup_stm32f446xx.s](https://github.com/STMicroelectronics/cmsis-device-f4/blob/v2.6.9/Source/Templates/gcc/startup_stm32f446xx.s) — cmsis-device-l4 `v1.7.5`, Apache-2.0
+- [startup_stm32f446xx.c](https://github.com/STMicroelectronics/cmsis-device-f4/blob/v2.6.9/Source/Templates/system_stm32f4xx.c) — cmsis-device-l4 `v1.7.5`, Apache-2.0
 
 CMSIS headers are vendored under `third_party/` as unmodified upstream files, trimmed
 to the subset this target can reach:
@@ -206,7 +209,8 @@ Each package keeps its upstream license file next to the headers. See
 
 ## References
 
-- [STM32L4R5ZI Reference Manual](https://www.st.com/resource/en/reference_manual/dm00310109-stm32l4x5xx-and-stm32l4x6xx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)
-- [Nucleo 144 User Manual](https://www.st.com/resource/en/user_manual/um2179-stm32-nucleo144-boards-mb1312-stmicroelectronics.pdf)
+- [STM32L446 Reference Manual](https://www.st.com/resource/en/reference_manual/rm0390-stm32f446xx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)
+- [Nucleo 144 User Manual](https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf)
+- [STM32F446xC/E Datasheet](https://www.st.com/resource/en/datasheet/stm32f446re.pdf)
 - [ARM GCC Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain)
 - [OpenOCD Documentation](http://openocd.org/doc/html/index.html)
