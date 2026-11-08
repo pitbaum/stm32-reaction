@@ -2,6 +2,7 @@
 # C++ Template for the Nucleo 144 (STM32L4466RE)
 
 Using a minimal C++ project template for STM32L4466RE microcontroller with CMake build system and integrated debugging support by Tom Schammo.
+
 Implementing a reaction timer game with LED, GPIO, UART and Interrupts.
 
 ## Features
