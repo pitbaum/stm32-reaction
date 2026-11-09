@@ -1,7 +1,7 @@
 
-# C++ Template for the Nucleo 144 (STM32L4466RE)
+# C++ Template for STM32F446RE and reaction button game
 
-Using a minimal C++ project template for STM32L4466RE microcontroller with CMake build system and integrated debugging support by Tom Schammo.
+Using a minimal C++ project template for STM32F446RE microcontroller with CMake build system and integrated debugging support forked from Tom Schammo's minimal template for the STM32L4466RE.
 
 Implementing a reaction timer game with LED, GPIO, UART and Interrupts.
 
@@ -209,8 +209,8 @@ Each package keeps its upstream license file next to the headers. See
 
 ## References
 
-- [STM32L446 Reference Manual](https://www.st.com/resource/en/reference_manual/rm0390-stm32f446xx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)
-- [Nucleo 144 User Manual](https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf)
+- [STM32F446 Reference Manual](https://www.st.com/resource/en/reference_manual/rm0390-stm32f446xx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)
+- [User Manual](https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf)
 - [STM32F446xC/E Datasheet](https://www.st.com/resource/en/datasheet/stm32f446re.pdf)
 - [ARM GCC Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain)
 - [OpenOCD Documentation](http://openocd.org/doc/html/index.html)
